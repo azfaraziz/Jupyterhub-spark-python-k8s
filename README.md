@@ -1,4 +1,4 @@
-# Setup of Jupyterhub + all-spark-notebook + Kubernetes (k8s) Locally
+# Setup Jupyterhub + all-spark-notebook + Kubernetes (k8s) Locally
 
 The goal of this "code" is to set up [Jupyterhub](https://github.com/jupyterhub/jupyterhub) within a local Kubenetes using [Minikube](https://kubernetes.io/docs/getting-started-guides/minikube/) that will run the [all-spark-notebook]( https://github.com/jupyter/docker-stacks/tree/master/all-spark-notebook)
 
@@ -12,7 +12,7 @@ These steps were done on a MacOS running High Sierra. This assumes you have thes
 
 These steps followed the steps in [Getting Started Guides](https://kubernetes.io/docs/getting-started-guides/minikube/) from the Kubernetes
 
-### Install
+### Installation
 
 1. Install [Virtualbox](https://www.virtualbox.org/)
 2. Install kubectl which is the K8s command-line tool
@@ -27,7 +27,7 @@ brew install kubectl
 curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.27.0/minikube-darwin-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
 ```
 
-### Start up
+### Start Minikube
 
 This will execute minikube through virtualbox with 8GB of memory and 2 CPUs
 
@@ -108,7 +108,7 @@ helm install jupyterhub/jupyterhub \
     -f config.yaml
 ```
 
-### Access JupyterHub
+### Access Jupyterhub
 
 With minikube, there is no external proxy possible which prevents jupyterhub from being able get the proxy-public pod to fully run. It will be active, but the load balancer is not properly set up. To get the URL, you will need to access one of the endpoints. To get this, run 
 ```bash
@@ -134,7 +134,7 @@ docker run --rm -p 10000:8888 -v "$PWD":/home/jovyan/work jupyter/all-spark-note
 
 This will spawn a single jupyter server locally
 
-## Change the docker image in Jupyterhub
+## Change docker image in Jupyterhub
 
 This follows the instructions found in [Zero-To-Jupyterhub: User Environment](http://zero-to-jupyterhub.readthedocs.io/en/latest/user-environment.html)
 
@@ -153,7 +153,6 @@ singleuser:
 helm upgrade poc-jupyterhub jupyterhub/jupyterhub --version=v0.6 --set rbac.enabled=false -f config.yaml
 ```
 
-
-# Additional resources
+# Additional Resources
 
 [Jupyter and Jupyterhub on AWS EMR](https://aws.amazon.com/blogs/big-data/running-jupyter-notebook-and-jupyterhub-on-amazon-emr/)
