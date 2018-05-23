@@ -1,5 +1,5 @@
 proxy:
-  secretToken: "8d4692802388329bbbc23c21f60eba02ce2e6c420171e88726a8b22793b3ba73"
+  secretToken: "<PUT-SECURITY-TOKEN-HERE>"
 
 singleuser:
   image:

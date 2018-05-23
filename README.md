@@ -93,7 +93,13 @@ kubectl --namespace=kube-system patch deployment tiller-deploy --type=json --pat
 
 2. Set up JupyterHub
 
-Use the existing ```config.yaml``` file. This contains the details for the all-spark-notebook by default. This can be changed in the next section.
+Create a security token by creating a random hex string. Run this command
+
+```bash
+openssl rand -hex 32
+```
+
+Use the generated value and update the ```config.yaml``` file where it says "<PUT-SECURITY-TOKEN-HERE>". This contains the details for the all-spark-notebook by default. This can be changed in the next section.
 
 ```bash
 helm repo add jupyterhub https://jupyterhub.github.io/helm-chart/
