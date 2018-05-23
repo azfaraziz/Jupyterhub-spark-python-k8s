@@ -2,11 +2,23 @@
 
 The goal of this "code" is to set up [Jupyterhub](https://github.com/jupyterhub/jupyterhub) within a local Kubenetes using [Minikube](https://kubernetes.io/docs/getting-started-guides/minikube/) that will run the [all-spark-notebook]( https://github.com/jupyter/docker-stacks/tree/master/all-spark-notebook)
 
-These steps were done on a MacOS running High Sierra. This assumes you have these installed:
+## Dependencies
 
-- Docker
-- VirtualBox
-- At least 10GB and 4 Cpus
+| Application | Version |
+| --- | --- |
+| MacOS | High Sierra 10.13.4 |
+| Docker | 18.03.1-ce-mac65 |
+| VirtualBox | 5.2.12 |
+
+In addition, at least 10GB RAM and 4 CPUs available
+
+## Installation Version
+
+| Application | Version |
+| --- | --- |
+| Jupyterhub | 0.9|
+| Minikube | 0.27 |
+| all-spark-notebook | 4ebeb1f2d154 |
 
 ## Step 1: Setup Minikube
 
@@ -21,7 +33,7 @@ These steps followed the steps in [Getting Started Guides](https://kubernetes.io
 brew install kubectl
 ```
 
-3. Install minikube v0.27
+3. Install minikube 
 
 ``` bash
 curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.27.0/minikube-darwin-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
