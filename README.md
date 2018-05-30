@@ -10,7 +10,7 @@ The goal of this "code" is to set up [Jupyterhub](https://github.com/jupyterhub/
 | Docker | 18.03.1-ce-mac65 |
 | VirtualBox | 5.2.12 |
 
-In addition, at least 10GB RAM and 4 CPUs available
+In addition, at least 10GB RAM and 4 Cores available
 
 ## Installation Version
 
