@@ -16,9 +16,12 @@ In addition, at least 10GB RAM and 4 CPUs available
 
 | Application | Version |
 | --- | --- |
+| Minikube | 0.25.2 (Kubernetes 1.9.4) |
 | Jupyterhub | 0.9|
-| Minikube | 0.27 |
 | all-spark-notebook | 4ebeb1f2d154 |
+| kubectl | 1.10.2 |
+| helm | 2.9.1 |
+| openssl | 1.0.2 |
 
 ## Step 1: Setup Minikube
 
@@ -33,15 +36,28 @@ These steps followed the steps in [Getting Started Guides](https://kubernetes.io
 brew install kubectl
 ```
 
+If there are issues with kubectl, such as a `permission denied` error, you might need to install it manually. Follow these steps
+
+```bash
+# Download binary
+curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.10.2/bin/darwin/amd64/kubectl
+
+# Make the kubectl binary executable.
+chmod +x ./kubectl
+
+# Move the binary in to your PATH.
+sudo mv ./kubectl /usr/local/bin/kubectl
+```
+
 3. Install minikube 
 
 ``` bash
-curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.27.0/minikube-darwin-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.25.2/minikube-darwin-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
 ```
 
 ### Start Minikube
 
-This will execute minikube through virtualbox with 8GB of memory and 2 CPUs
+This will execute minikube through virtualbox with at least __8GB Memory__ and __2 CPUs__
 
 ```bash
 minikube --memory 8192 --cpus 2 start
@@ -52,7 +68,13 @@ To ensure proper setup, spin up a simple "Hello World" container
 ```bash
 kubectl run hello-minikube --image=k8s.gcr.io/echoserver:1.4 --port=8080
 
-kubectl expose deployment hello-minikube --type=NodePort
+kubectl expose deployment hello-minikube --type=NodePort --type=LoadBalancer
+```
+
+Since minikube does not have a load balancer, to view the `hello-minikube` result, execute the container as a service which will open up a web page in the default browser. This will show the GET call and the response
+
+```bash
+minikube service hello-minikube
 ```
 
 ### Dashboard
@@ -119,7 +141,7 @@ helm repo add jupyterhub https://jupyterhub.github.io/helm-chart/
 helm repo update
 
 helm install jupyterhub/jupyterhub \
-    --version=v0.6 \
+    --version=v0.9 \
     --name=poc-jupyterhub \
     --namespace=poc-jupyterhub \
     --set rbac.enabled=false \
